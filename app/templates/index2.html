@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Task</title>
+</head>
+
+<body>
+
+    <h1>Task Manager</h1>
+    <form action="/index" method="post">
+    {%for k,v in data.items()%}
+        {%if k=='Monday'%}
+            <h2>Monday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%}
+            
+        {%elif k=='Tuesday'%}
+            <h2>Tuesday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%}   
+            
+        {%elif k=='Wednesday'%}
+            <h2>Wednesday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%} 
+        
+        {%elif k=='Thursday'%}
+            <h2>Thursday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%} 
+        
+        {%elif k=='Friday'%}
+            <h2>Friday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%} 
+        
+        {%elif k=='Saturday'%}
+            <h2>Saturday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%} 
+        
+        {%elif k=='Sunday'%}
+            <h2>Sunday</h2>
+            {%for task in v%}
+                <p>{{task['title']}}</p>
+                <p>{{task['priority']}}</p>
+                {%if task['status']=='complete'%} 
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked/>
+                {%else%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}"/> 
+                {%endif%}
+            {%endfor%} 
+        {%endif%}  
+    {%endfor%}
+    <input type="submit">
+    </form>
+    
+    <p>{{data}}</p>
+
+
+
+
+</body>
+</html>
