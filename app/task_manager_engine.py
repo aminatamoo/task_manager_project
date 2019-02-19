@@ -24,7 +24,7 @@ def create_table():
 def data_entry():
     date = '2019-02-21'
     day = convert_date_to_day(date)
-    c.execute("INSERT INTO tasks VALUES(3, 'Clean', ?, ?, '10:15:00', 'Clean kitchen and living room', 'low', 'incomplete')",(date, day))
+    c.execute("INSERT INTO tasks VALUES(4, 'Graduate', ?, ?, '10:15:00', 'Graduation ceremony', 'low', 'incomplete')",(date, day))
     conn.commit() 
     c.close() 
     conn.close() 
@@ -34,7 +34,6 @@ def convert_date_to_day(date):
     answer = datetime.date(year, month, day).weekday()
     day = calendar.day_name[answer]
     return day
-    
     
 def dynamic_data_entry(title, date, time, priority, description):
     c.execute('INSERT INTO tasks(title, date, day, time, priority, description) VALUES (?, ?, ?, ?, ?)', (title, date, time, priority, description))
@@ -94,7 +93,6 @@ def retrieve_data_eighteen_feb():
 #date = calendar.day_name[answer]
 #print(date)
     
-
 data_entry()
     
     

@@ -24,7 +24,6 @@ def index():
 #    
 #    if request.method == 'GET':
 #        methods=['GET','POST']
-        
 
 @app.route('/addtask',methods=['GET','POST'])
 def get_data():
@@ -41,7 +40,6 @@ def get_data():
     #   cursor.execute(query,(first_name,last_name,email_id))
     #   connection.commit()
        return render_template("show_task.html", **locals())
-
 
 if __name__=='__main__':
     app.run(debug=True)
