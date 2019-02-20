@@ -20,7 +20,7 @@ def getdb():
 
 def create_table():
     c,conn=getdb()
-    c.execute('CREATE TABLE IF NOT EXISTS tasks (id REAL, title TEXT, date DATE, day TEXT,time TIME, description TEXT, priority TEXT, status TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, date DATE, day TEXT,time TIME, description TEXT, priority TEXT, status TEXT)')
 
 def convert_date_to_day(date):
     year, month, day = (int(x) for x in date.split('-'))
@@ -28,24 +28,30 @@ def convert_date_to_day(date):
     day = calendar.day_name[answer]
     return day
  
-def data_entry(id_t,title,date,time,description,priority,status):
+def data_entry(title,date,time,description,priority):
     day = convert_date_to_day(date)
+    status = 'incomplete'
     c,conn=getdb()
-    c.execute("INSERT INTO tasks VALUES(?,?,?,?,?,?,?,?)",(id_t,title,date,day,time,description,priority,status))
+    c.execute("INSERT INTO tasks VALUES(?,?,?,?,?,?,?,?)",(None,title,date,day,time,description,priority,status))
     conn.commit() 
     c.close() 
     conn.close() 
+
     
 def delete_task(id_t):
     c,conn=getdb()
     c.execute('DELETE FROM tasks WHERE id=?',(id_t,))
     conn.commit()
+    c.close() 
+    conn.close() 
     
 def edit_task(id_t,title,date,time,description,priority,status):
     c,conn=getdb()
     c.execute('DELETE FROM tasks WHERE id=?',(id_t,))
     data_entry(id_t,title,date,time,description,priority,status)
     conn.commit()
+    c.close() 
+    conn.close() 
 
 def retrieve_data(query):
     c,conn=getdb()
@@ -67,12 +73,18 @@ def retrieve_a_task(id_t):
     data = retrieve_data(query)
     return data
 
-def call_api(payload):
+def call_api_alltask(payload):
     endpoint = 'http://127.0.0.1:5000/'
     response = requests.get(endpoint+payload)
     data = response.json()  
     data = groupBy_day(data)
-    return data    
+    return data 
+
+def call_api_onetask(payload):
+    endpoint = 'http://127.0.0.1:5000/'
+    response = requests.get(endpoint+payload)
+    data = response.json() 
+    return data
 
 def groupBy_day(data):
     date_today=datetime.datetime.today().strftime('%Y-%m-%d')
@@ -98,9 +110,34 @@ def groupBy_day(data):
             d_group['due'].append(d)
     return d_group
 
-def status_process(status_l):
-    print(status_l)
+def status_process(status_final,data):
+    #status_l will be a list containg the ids of all the completed tasks
+    c,conn=getdb()
+    
+    status_init={}
+    for k,v in data.items():
+        for task in v:
+            status_init[task['id']]=task['status']
+            
+    list_id_t=list(status_init.keys())
+    status_final=list(map(int,status_final))
+    
+    for id_t in list_id_t:
+        if id_t in status_final:
+            if status_init[id_t]=='incomplete':            
+                query = "UPDATE tasks SET status = 'complete' WHERE id = {}".format(id_t)
+                c.execute(query)
+                conn.commit()
+        elif id_t not in status_final:
+            if status_init[id_t]=='complete':            
+                c,conn=getdb()
+                query = "UPDATE tasks SET status = 'incomplete' WHERE id = {}".format(id_t)
+                c.execute(query)
+                conn.commit()
+    c.close()
+    conn.close() 
 
+#<!--<a href="{{url_for('addtask')}}"><button>add</a></button>-->
 
             
     
