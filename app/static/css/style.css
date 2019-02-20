@@ -1,0 +1,25 @@
+.column {
+  text-align: center;
+  margin: 7px;
+}
+
+li {
+  line-height: 35px;
+  padding-left: 10px;
+}
+
+.deadline {
+  margin-left: 2%;
+}
+
+.high {
+  color: red;
+}
+
+.medium {
+  color: orange;
+}
+
+.low {
+   color: yellow;
+}
