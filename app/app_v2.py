@@ -12,6 +12,8 @@ import requests
 
 app = Flask("MyApp")
 cors = CORS(app)
+app.config['SECRET_KEY'] = 'reds209ndsldssdsljdslddbfudfbidabdfnfsfis'
+#app.secret_key()
 
 #    
 ##-----------------HTML TEMPLATE--------------#
@@ -47,7 +49,7 @@ def showtask(id_t):
             return redirect(url_for('index'))
             
     if request.method=='GET':
-        return render_template('showtask.html',**locals())
+        return render_template('showtask_v1.html',**locals())
 
 @app.route("/edittask/<id_t>",methods=['GET','POST'])
 def edittask(id_t):
@@ -63,7 +65,7 @@ def edittask(id_t):
     if request.method=='POST':
         pass      
     if request.method=='GET':
-        return render_template('edittask.html',**locals()) 
+        return render_template('edittask_v1.html',**locals()) 
     
 @app.route("/addtask",methods=['GET','POST'])
 def addtask():
@@ -74,7 +76,7 @@ def addtask():
         time=request.form['time']
         priority=request.form['priority']
         description=request.form['description']
-        data_entry(title, date, time, priority, description)
+        data_entry(title, date, time, description, priority)
         flash('You\'ve successfully added a task', 'success')       
         return redirect(url_for('index'))
     if request.method=='GET':

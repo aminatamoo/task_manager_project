@@ -62,7 +62,7 @@ def retrieve_data(query):
         data['tasks'].append({'id':row[0],'title':row[1],'date':row[2],'day':row[3],'time':row[4],'description':row[5],'priority':row[6],'status':row[7]})
     data = json.dumps(data)
     return data
-    
+   
 def retrieve_all_tasks():
     query = 'SELECT * FROM tasks ORDER BY date'
     data = retrieve_data(query)
@@ -72,7 +72,7 @@ def retrieve_a_task(id_t):
     query = 'SELECT * FROM tasks WHERE id={}'.format(id_t)
     data = retrieve_data(query)
     return data
-print(retrieve_a_task(2))
+
 def call_api_alltask(payload):
     endpoint = 'http://127.0.0.1:5000/'
     response = requests.get(endpoint+payload)
