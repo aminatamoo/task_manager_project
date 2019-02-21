@@ -45,10 +45,10 @@ def delete_task(id_t):
     c.close() 
     conn.close() 
     
-def edit_task(id_t,title,date,time,description,priority,status):
+def update_task(id_t,title,date,time,description,priority,status):
     c,conn=getdb()
-    c.execute('DELETE FROM tasks WHERE id=?',(id_t,))
-    data_entry(id_t,title,date,time,description,priority,status)
+    c.execute('UPDATE tasks SET title=?,date=?,time=?,description=?,priority=?,status=? WHERE id=?',(title,date,time,description,priority,status,id_t))
+
     conn.commit()
     c.close() 
     conn.close() 
@@ -111,7 +111,6 @@ def groupBy_day(data):
     return d_group
 
 def status_process(status_final,data):
-    #status_l will be a list containg the ids of all the completed tasks
     c,conn=getdb()
     
     status_init={}
