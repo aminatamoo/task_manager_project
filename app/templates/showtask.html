@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+  <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html"><i class="fa fa-home"></i></a>
+      </li>
+    </ul>
+  </div>
+  <!--nav-->
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Task Manager</h1>
+      <p class="lead"></p>
+    </div>
+    <!--container-->
+  </div>
+  <!--jumbotron-->
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col">
+        <h2>Title: {{title}}</h2>
+      </div><!--col-->
+
+        <div class="col">
+        <p>Due Date: {{date}}</p>
+        <p>Due Time: {{time}}</p>
+        </div><!--col-->
+
+        <div class="col">
+          <p>{{priority}}</p>
+        </div><!--col-->
+        <p>Description:</p>
+        <p>{{description}}</p>
+
+        <p>{{status}}</p>
+
+        <form action="showtask/{{id_t}}" method="post">
+          <input type="submit" name="edit_button" value="Edit Task">
+        </form>
+
+        <form action="showtask/{{id_t}}" method="post">
+          <input type="submit" name="delete_button" value="Delete Task">
+        </form>
+
+        <form action="showtask/{{id_t}}" method="post">
+          <input type="submit" name="close_button" value="Close Task">
+        </form>
+
+      </div>
+      <!--end of container-->
+
+</body>
+
+</html>
