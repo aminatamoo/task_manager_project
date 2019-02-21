@@ -235,6 +235,12 @@ button {
   margin: 10px;
 }
 
+.btn {
+  justify-content: center;
+  width: 100px;
+  margin: 10px;
+}
+
 /*save button */
 
 button.like{
