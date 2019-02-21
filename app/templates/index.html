@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Homepage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../static/css/style.css">
@@ -14,7 +15,7 @@
     <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link active" href="http://127.0.0.1:5000/index"><i class="fa fa-home"></i></a>
+          <a class="nav-link active" href="index"><i class="fa fa-home"></i></a>
         </li>
       </ul>
     </div>
@@ -34,7 +35,7 @@
     {%endfor%}
     {%endif%}
     {%endwith%}
-    <form action="/index" method="post">
+    <form action="/index" method="POST">
       <div class="column-container">
         <div class="row">
           {% for k,v in data.items() %}
@@ -67,8 +68,8 @@
       <div class="container">
         <div class="wrapper-buttons">
           <div class="container-buttons">
-            <input type="submit" class="like btn btn-primary" name="save_button" value="Save">
-            <a href="addtask"><button class="btn btn-primary">Add Task</button></a>
+            <input type="submit" class="like btn btn-primary" name="save" value="Save">
+            <input type="submit" name="add" value="Add Task" class="btn btn-primary">
           </div>
           <!--end of container-buttons-->
         </div>
@@ -103,7 +104,7 @@
           <h3>Due Today</h3>
           {%for task in v%}
           <ul>
-            <li class="week {{task['priority']}}">{{task['title']}} {{task['priority']}} <span class='deadline'>{{task['date']}}</span>
+            <li class="week {{task['priority']}}">{{task['title']}}<span class='deadline'>{{task['date']}}</span>
             </li>
           </ul>
           {%endfor%}
