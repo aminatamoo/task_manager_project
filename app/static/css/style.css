@@ -288,3 +288,18 @@ footer {
 .high-title-border {
   border-left: 10px solid red;
 }
+
+.medium-title-border {
+  border-left: 10px solid orange;
+}
+
+.low-title-border {
+  border-left: 10px solid yellow;
+}
+
+
+/* ------------------------Addtask.html --------------------------*/
+
+.add-task-form {
+  margin-bottom: 20px;
+}
