@@ -27,6 +27,13 @@
     </div>
 
     <div class="container">
+      {%with messages = get_flashed_messages(with_categories=true)%}
+        {%if messages%}
+          {%for category, message in messages%}
+            <div class="alert alert-{{category}}">{{message}}</div>
+          {%endfor%}
+        {%endif%}
+      {%endwith%}
       <form action="/index" method="post">
         <div class="column-container">
           <div class="row">
@@ -37,8 +44,8 @@
               <ul class="css3--checkbox">
                 {% for task in v %}
                 <label>
-                  <li class="week {{task['priority']}}"><span>{{task['title']}}
-                      {%if task['status']=='complete'%}</span>
+                  <li class="week {{task['priority']}}"><span><a href="showtask/{{task['id']}}">{{task['title']}}</a>
+                    {%if task['status']=='complete'%}</span>
                     <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
                     {% else %}
                     <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
@@ -54,9 +61,10 @@
         </div>
         <!--end of column container-->
 
+
         <div class="wrapper-buttons">
           <div class="container-buttons">
-          <button type="submit" class="like btn btn-primary" name="foo" value="bar">Save</button>
+          <input  type="submit" class="like btn btn-primary" name="save_button" value="Save">
           <a href="addtask"><button class ="btn btn-primary">Add Task</button></a>
           </div><!--end of container-buttons-->
           </div><!--end of wrapper-buttons-->
@@ -94,7 +102,7 @@
 
             <div class="col priority-and-due">
               {%for k,v in data.items()%}
-              {%if k=='high'%}
+              {%if k=='due'%}
               <h3>Due Today</h3>
               {%for task in v%}
               <ul>
