@@ -11,6 +11,13 @@
 <body>
 
     <h1>Task Manager</h1>
+    {%with messages = get_flashed_messages(with_categories=true)%}
+      {%if messages%}
+        {%for category, message in messages%}
+          <div class="alert alert-{{category}}">{{message}}</div>
+        {%endfor%}
+      {%endif%}
+    {%endwith%}
     <form action="index" method="post">
     {%for k,v in data.items()%}
       {%if k!='high' and k!='due'%}

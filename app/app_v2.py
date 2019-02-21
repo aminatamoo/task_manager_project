@@ -20,7 +20,6 @@ def index():
     payload='alltasks'
     data=call_api_alltask(payload)
     if request.method=='POST':
-        print(2)
         status =request.form.getlist('check')
         status_process(status,data)
         return redirect(url_for('index'))            
@@ -29,31 +28,54 @@ def index():
 
 @app.route("/showtask/<id_t>",methods=['GET','POST'])
 def showtask(id_t):
+    payload='task/{}'.format(id_t)
+    data=call_api_onetask(payload)
+    id_t=id_t
+    title=data['tasks'][0]['title']
+    date=data['tasks'][0]['date']
+    time=data['tasks'][0]['time']
+    description=data['tasks'][0]['description']
+    priority=data['tasks'][0]['priority']
+    status=data['tasks'][0]['status']
     if request.method=='POST':
-        pass        
+        if request.form['edit_button']=='Edit Task':
+            return redirect(url_for('edittask', id_t=id_t))
+        if request.form['delete_button']=='Delete Task':
+            delete_task(id_t)
+            return redirect(url_for('index'))
+        if request.form['close_button']=='Close Task':
+            return redirect(url_for('index'))
+            
     if request.method=='GET':
-        payload='task/{}'.format(id_t)
-        data=call_api_onetask(payload)
-        id_t=data['tasks'][0]['id']
-        title=data['tasks'][0]['title']
-        date=data['tasks'][0]['date']
-        time=data['tasks'][0]['time']
-        description=data['tasks'][0]['description']
-        priority=data['tasks'][0]['priority']
-        status=data['tasks'][0]['status']
         return render_template('showtask.html',**locals())
+
+@app.route("/edittask/<id_t>",methods=['GET','POST'])
+def edittask(id_t):
+    payload='task/{}'.format(id_t)
+    data=call_api_onetask(payload)
+    id_t=id_t
+    title=data['tasks'][0]['title']
+    date=data['tasks'][0]['date']
+    time=data['tasks'][0]['time']
+    description=data['tasks'][0]['description']
+    priority=data['tasks'][0]['priority']
+    status=data['tasks'][0]['status']
+    if request.method=='POST':
+        pass      
+    if request.method=='GET':
+        return render_template('edittask.html',**locals()) 
     
 @app.route("/addtask",methods=['GET','POST'])
 def addtask():
     if request.method=='POST':
-        print(1)
+
         title=request.form['title']
         date=request.form['date']
         time=request.form['time']
         priority=request.form['priority']
         description=request.form['description']
         data_entry(title, date, time, priority, description)
-##        flash('You\'ve successfully added a task')       
+        flash('You\'ve successfully added a task', 'success')       
         return redirect(url_for('index'))
     if request.method=='GET':
         return render_template('addtask.html',**locals())

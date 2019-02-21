@@ -19,16 +19,14 @@
     <p>{{status}}</p>
 
     <form action="showtask/{{id_t}}" method="post">
-      <input type="submit" name="edit_button" value="Edit Task">
+      <input type="submit" name="save_button" value="Save Task">
     </form>
 
     <form action="showtask/{{id_t}}" method="post">
       <input type="submit" name="delete_button" value="Delete Task">
     </form>
 
-    <form action="showtask/{{id_t}}" method="post">
-      <input type="submit" name="close_button" value="Close Task">
-    </form>
+
 
 
 
