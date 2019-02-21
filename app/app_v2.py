@@ -15,18 +15,21 @@ cors = CORS(app)
 app.config['SECRET_KEY'] = 'reds209ndsldssdsljdslddbfudfbidabdfnfsfis'
 #app.secret_key()
 
-#    
-##-----------------HTML TEMPLATE--------------#
+   
+#--------------------HTML TEMPLATE--------------------#
+
 @app.route("/index",methods=['GET','POST'])
 def index():
     payload='alltasks'
     data=call_api_alltask(payload)
     if request.method=='POST':
-        status =request.form.getlist('check')
+        status = request.form.getlist('check')
         status_process(status,data)
+        flash('Your changes have been made successfully', 'success')
         return redirect(url_for('index'))            
     if request.method=='GET':
         return render_template('index2.html',data=data)
+
 
 @app.route("/showtask/<id_t>",methods=['GET','POST'])
 def showtask(id_t):
@@ -51,6 +54,7 @@ def showtask(id_t):
     if request.method=='GET':
         return render_template('showtask_v1.html',**locals())
 
+
 @app.route("/edittask/<id_t>",methods=['GET','POST'])
 def edittask(id_t):
     if request.method=='POST':
@@ -61,10 +65,11 @@ def edittask(id_t):
             description=request.form.get('description')
             priority=request.form.get('priority')
             if request.form.get('status'):
-                status=request.form.get('status')
-            else:
+                status='complete'
+            elif not request.form.get('status'):
                 status='incomplete'
             update_task(id_t,title,date,time,description,priority,status)           
+            flash('You\'ve successfully updated a task', 'success')       
             return redirect(url_for('index'))
         elif 'delete' in request.form:
             delete_task(id_t)
@@ -82,16 +87,16 @@ def edittask(id_t):
         priority=data['tasks'][0]['priority']
         status=data['tasks'][0]['status']
         return render_template('edittask_v1.html',**locals()) 
+
     
 @app.route("/addtask",methods=['GET','POST'])
 def addtask():
     if request.method=='POST':
-
-        title=request.form['title']
-        date=request.form['date']
-        time=request.form['time']
-        priority=request.form['priority']
-        description=request.form['description']
+        title=request.form.get('title')
+        date=request.form.get('date')
+        time=request.form.get('time')
+        priority=request.form.get('priority')    
+        description=request.form.get('description')
         data_entry(title, date, time, description, priority)
         flash('You\'ve successfully added a task', 'success')       
         return redirect(url_for('index'))
