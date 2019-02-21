@@ -3,27 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <title>View Task</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css?family=Coda|Hind" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
 </head>
 
 <body>
 
     <h1>Task Manager</h1>
 
+    <form  action="" method="post">
+      <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Task Title</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Task Title" value="{{title}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="date" class="col-sm-2 col-form-label">Date</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" value="{{date}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="time" class="col-sm-2 col-form-label">Time</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="time" name="time" placeholder="HH-MM-SS" value="{{time}}">
+        </div>
+      </div>
+      <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Priority</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="priority" id="priority" value="high" {%if priority =='high'%} checked {%endif%}>
+              <label class="form-check-label" for="priority">
+                High
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="priority" id="priority" value="medium" {%if priority =='medium'%} checked {%endif%}>
+              <label class="form-check-label" for="priority">
+                Medium
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="priority" id="priority" value="low" {%if priority =='low'%} checked {%endif%}>
+              <label class="form-check-label" for="priority">
+                Low
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Optional">{{description}}</textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="status" name="status" value="{{status}}" {%if status =='complete'%} checked {%endif%}/>
+        <label class="form-check-label" for="status">
+          Status
+        </label>
+      </div>
 
-    <p>Title: {{title}}</p>
-    <p>Due Date: {{date}}</p>
-    <p>Due Time: {{time}}</p>
-    <p>Description:</p>
-    <p>{{description}}</p>
-    <p>{{priority}}</p>
-    <p>{{status}}</p>
-
-    <form action="showtask/{{id_t}}" method="post">
-      <input type="submit" name="save_button" value="Save Task">
-    </form>
-
-    <form action="showtask/{{id_t}}" method="post">
-      <input type="submit" name="delete_button" value="Delete Task">
+      <input type="submit" name="save" value="Save Task">
+      <input type="submit" name="delete" value="Delete Task">
     </form>
 
 
