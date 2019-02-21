@@ -23,10 +23,14 @@ def index():
     payload='alltasks'
     data=call_api_alltask(payload)
     if request.method=='POST':
-        status = request.form.getlist('check')
-        status_process(status,data)
-        flash('Your changes have been made successfully', 'success')
-        return redirect(url_for('index'))            
+        if 'save' in request.form: 
+            status = request.form.getlist('check')
+            status_process(status,data)
+            flash('Your changes have been made successfully', 'success')
+            return redirect(url_for('index')) 
+        if 'add' in request.form:
+            return redirect(url_for('addtask'))
+           
     if request.method=='GET':
         return render_template('index2.html',data=data)
 
