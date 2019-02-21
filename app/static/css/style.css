@@ -21,6 +21,7 @@ body {
 .container-buttons {
 display: flex;
 justify-content: center;
+margin-bottom: 40px;
 }
 
 .column-container {
@@ -28,7 +29,7 @@ justify-content: center;
   justify-content: center;
 }
 
-/* Nav bar*/
+/* Nav bar top and bottom*/
 
 #navbar {
   padding: -0.5rem 0rem;
@@ -41,6 +42,15 @@ a.nav-link.active {
   transition: all 0.3s ease; /* Add transition for hover effects */
   color: white; /* White text color */
   font-size: 22px; /* Increased font-size */
+}
+
+a.nav-link.active.bottom {
+  display: block; /* Make the links appear below each other instead of side-by-side */
+  text-align: center; /* Center-align text */
+  padding: 16px; /* Add some padding */
+  transition: all 0.3s ease; /* Add transition for hover effects */
+  color: #2D3142; /* White text color */
+  font-size: 50px; /* Increased font-size */
 }
 
 /* Columns */
@@ -56,12 +66,16 @@ a.nav-link.active {
 .col-sm {
   border-right: 2px solid #2D3142;
 }
+.col-sm:last-of-type { border-right: none; }
 
 .col-sm {
   text-align: justify;
   margin: 7px;
 }
 
+.row {
+  width: 90%;
+}
 /*Formatting text*/
 
 h3 {
@@ -92,7 +106,7 @@ li.week::before {
 
   font-size: 1.5em;
 
-  padding-right: 0.5em;
+  padding-right: 3px;
 
   padding-left: 0em;
 
@@ -132,100 +146,72 @@ li.week::before {
 /* Check boxes*/
 /* ------------------------------------------------------------- */
 
-.css3--radio,
 .css3--checkbox {
-	@include no-bullets();
+  list-style-type: none;
 	display: inline-block;
-	li {
-		display: inline-block;
-		margin-right: 1em;
-	}
+}
+.css3--checkbox li {
+  display: inline-block;
+  /* margin-right: 1em; */
 }
 
-:root .css3--radio,
-:root .css3--checkbox {
-	label {
+:root .css3--checkbox 	label {
 	    display: inline-block;
 	    vertical-align: middle;
 	}
 
-	label * { cursor: pointer; }
+:root .css3--checkbox label * { cursor: pointer; }
+:root .css3--checkbox label:hover span,
+	:root .css3--checkbox  label:hover span { color:green; }
 
-	label:hover span,
-	label:hover span { color: $col-brand; }
+:root .css3--checkbox input { border: none; }
 
-	input { border: none; }
-}
-
-:root {
-	.css3--radio input[type="radio"] + span,
-	.css3--radio input[type="radio"] + span::before,
-	.css3--checkbox input[type="checkbox"] + span,
-	.css3--checkbox input[type="checkbox"] + span::before {
+	:root .css3--checkbox input[type="checkbox"] + span,
+	:root .css3--checkbox input[type="checkbox"] + span::before {
 	    display: inline-block;
 	    vertical-align: middle;
 	}
 
-	.css3--radio input[type="radio"],
-	.css3--checkbox input[type="checkbox"] {
+	:root .css3--checkbox input[type="checkbox"] {
 	    opacity: 0;
 	    position: absolute;
 	}
 
-	.css3--radio input[type="radio"] + span,
-	.css3--checkbox input[type="checkbox"] + span {
-		@include font-size(16);
+	:root .css3--checkbox input[type="checkbox"] + span {
+		font-size: 16px;
 		font-weight: 400;
 		text-transform: none;
 		letter-spacing: 0;
 	}
 
-	.css3--radio input[type="radio"] + span::before,
-	.css3--checkbox input[type="checkbox"] + span::before {
+	:root .css3--checkbox input[type="checkbox"] + span::before {
 	    content: "";
 	    margin: 0 8px 0 0;
-	    border: 2px solid $col-border;
+	    border: 2px solid #ccc;
 	    line-height: 0.5;
 	    text-align: center;
 	}
 
-	.css3--radio input[type="radio"]:checked + span::before,
-	.css3--checkbox input[type="checkbox"]:checked + span::before { color: $col-text; }
+	:root .css3--checkbox input[type="checkbox"]:checked + span::before { color:white; }
 
-	.css3--radio input[type="radio"]:disabled + span,
-	.css3--checkbox input[type="checkbox"]:disabled + span {
+	:root .css3--checkbox input[type="checkbox"]:disabled + span {
 	    cursor: default;
 	    opacity: .4;
 	}
 
-}
 
-:root .css3--radio {
-	input[type="radio"] + span::before {
-	   	width: 14px;
-	    height: 14px;
-		@include border-radius(100%);
-	}
 
-	input[type="radio"]:checked + span::before {
-	    content: "\2022";
-	    font-size: 32px;
-	}
-}
-
-:root .css3--checkbox {
-	input[type="checkbox"] + span::before {
+	:root .css3--checkbox input[type="checkbox"] + span::before {
 	   	width: 28px;
 	    height: 28px;
 	}
 
-	input[type="checkbox"]:checked + span::before 	{
+	:root .css3--checkbox input[type="checkbox"]:checked + span::before 	{
 		content: '';
 		background-image: url('../images/check.svg');
-		background-color: white;
-		border-color: black;
+		background-color:green;
+		border-color: green;
 	}
-}
 
 /* Buttons */
 
@@ -283,10 +269,22 @@ button.like{
 
 footer {
   background-color: #e9ecef;
-  padding-bottom: 10px;
-  padding-top: 1px;
-  bottom: 0;
+  padding: 50px 0;
   width: 100%;
   display: block;
   position: relative;
+}
+
+/* ------------------------Showtask.html --------------------------*/
+
+.time {
+  margin-left: 80px;
+}
+
+.task-property {
+  font-size: 30px;
+}
+
+.high-title-border {
+  border-left: 10px solid red;
 }

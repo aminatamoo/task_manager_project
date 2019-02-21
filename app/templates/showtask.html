@@ -13,7 +13,7 @@
   <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link active" href="index.html"><i class="fa fa-home"></i></a>
+        <a class="nav-link active" href="http://127.0.0.1:5000/index"><i class="fa fa-home"></i></a>
       </li>
     </ul>
   </div>
@@ -29,39 +29,69 @@
   <!--jumbotron-->
 
   <div class="container">
-    <div class="row">
 
+    <div class="row {{priority}}-title-border"">
       <div class="col">
-        <h2>Title: {{title}}</h2>
-      </div><!--col-->
-
-        <div class="col">
-        <p>Due Date: {{date}}</p>
-        <p>Due Time: {{time}}</p>
-        </div><!--col-->
-
-        <div class="col">
-          <p>{{priority}}</p>
-        </div><!--col-->
-        <p>Description:</p>
-        <p>{{description}}</p>
-
-        <p>{{status}}</p>
-
-        <form action="showtask/{{id_t}}" method="post">
-          <input type="submit" name="edit_button" value="Edit Task">
-        </form>
-
-        <form action="showtask/{{id_t}}" method="post">
-          <input type="submit" name="delete_button" value="Delete Task">
-        </form>
-
-        <form action="showtask/{{id_t}}" method="post">
-          <input type="submit" name="close_button" value="Close Task">
-        </form>
-
+        <p class="task-property">Title: {{title}}</p>
       </div>
-      <!--end of container-->
+      <!--col-->
+    </div>
+    <!--row-->
+
+    <div class="row">
+      <div class="col">
+        <p class="task-property">Date: {{date}}<span class="time task-property-title">Time: {{time}}</span></p>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+
+    <div class="row">
+      <div class="col">
+        <p class="task-property">Priority: {{priority}}</p>
+    </div>
+    <!--col-->
+    </div>
+    <!--row-->
+
+    <div class="row">
+      <div class="col">
+        <p class="task-property">Description:</p>
+        <p class="task-property">{{description}}</p>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+
+    <div class="wrapper-buttons">
+      <div class="container-buttons">
+
+      <form action="showtask/{{id_t}}" method="post">
+        <input type="submit" name="edit_button" value="Edit Task" class="btn btn-primary">
+      </form>
+
+      <form action="showtask/{{id_t}}" method="post">
+        <input type="submit" name="delete_button" value="Delete Task" class="btn btn-primary">
+      </form>
+
+      <form action="showtask/{{id_t}}" method="post">
+        <input type="submit" name="close_button" value="Close Task" class="btn btn-primary">
+      </form>
+
+    </div><!--end of container-buttons-->
+    </div><!--end of wrapper-buttons-->
+
+    </div>
+    <!--end of container-->
+
+    <footer>
+      <a class="nav-link active bottom" href="http://127.0.0.1:5000/index"><i class="fa fa-home"></i></a>
+
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 

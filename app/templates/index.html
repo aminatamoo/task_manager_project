@@ -14,7 +14,7 @@
     <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link active" href="index.html"><i class="fa fa-home"></i></a>
+          <a class="nav-link active" href="http://127.0.0.1:5000/index"><i class="fa fa-home"></i></a>
         </li>
       </ul>
     </div>
@@ -26,55 +26,54 @@
       </div>
     </div>
 
-    <div class="container">
-      {%with messages = get_flashed_messages(with_categories=true)%}
-        {%if messages%}
-          {%for category, message in messages%}
-            <div class="alert alert-{{category}}">{{message}}</div>
-          {%endfor%}
-        {%endif%}
-      {%endwith%}
-      <form action="/index" method="post">
-        <div class="column-container">
-          <div class="row">
-            {% for k,v in data.items() %}
-            {% if k != 'high' and k != 'due' %}
-            <div class="col-sm">
-              <h3>{{k}}</h3>
-              <ul class="css3--checkbox">
-                {% for task in v %}
+    <!--<div class="container">-->
+    {%with messages = get_flashed_messages(with_categories=true)%}
+    {%if messages%}
+    {%for category, message in messages%}
+    <div class="alert alert-{{category}}">{{message}}</div>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+    <form action="/index" method="post">
+      <div class="column-container">
+        <div class="row">
+          {% for k,v in data.items() %}
+          {% if k != 'high' and k != 'due' %}
+          <div class="col-sm">
+            <h3>{{k}}</h3>
+            <ul class="kkkcss3--checkbox">
+              {% for task in v %}
+
+              <li class="week {{task['priority']}}">
                 <label>
-                  <li class="week {{task['priority']}}"><span><a href="showtask/{{task['id']}}">{{task['title']}}</a>
-                    {%if task['status']=='complete'%}</span>
-                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
-                    {% else %}
-                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
-                    {% endif %}
+                  {%if task['status']=='complete'%}
+                  <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
+                  {% else %}
+                  <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
+                  {% endif %}
+                  <span><a href="showtask/{{task['id']}}">{{task['title']}}</a></span>
                 </label>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-            {% endif %}
-            {%endfor%}
-          </div><!-- .row -->
-        </div>
-        <!--end of column container-->
 
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          {%endfor%}
+        </div><!-- .row -->
+      </div>
+      <!--end of column container-->
 
+      <div class="container">
         <div class="wrapper-buttons">
           <div class="container-buttons">
-          <input  type="submit" class="like btn btn-primary" name="save_button" value="Save">
-          <a href="addtask"><button class ="btn btn-primary">Add Task</button></a>
-          </div><!--end of container-buttons-->
-          </div><!--end of wrapper-buttons-->
-
-          </form>
-
-
-
-  </div>
-  <!--end of container-->
+            <input type="submit" class="like btn btn-primary" name="save_button" value="Save">
+            <a href="addtask"><button class="btn btn-primary">Add Task</button></a>
+          </div>
+          <!--end of container-buttons-->
+        </div>
+        <!--end of wrapper-buttons-->
+    </form>
 
   </div>
   <!--main-container-->
@@ -82,46 +81,40 @@
   <footer>
 
     <div class="container">
-
-      <div class="wrapper">
-        <div class="column-container">
-          <div class="row">
-            <div class="col priority-and-due priority">
-              {%for k,v in data.items()%}
-              {%if k=='high'%}
-              <h3>High Priority</h3>
-              {%for task in v%}
-              <ul>
-                <li class="week {{task['priority']}}">{{task['title']}} <span class='deadline'>{{task['date']}}</span>
-                </li>
-              </ul>
-              {%endfor%}
-              {%endif%}
-              {%endfor%}
-            </div>
-
-            <div class="col priority-and-due">
-              {%for k,v in data.items()%}
-              {%if k=='due'%}
-              <h3>Due Today</h3>
-              {%for task in v%}
-              <ul>
-                <li class="week {{task['priority']}}">{{task['title']}} {{task['priority']}} <span class='deadline'>{{task['date']}}</span>
-                </li>
-              </ul>
-              {%endfor%}
-              {%endif%}
-              {%endfor%}
-            </div>
-
-          </div>
-          <!--end of row-->
+      <div class="row">
+        <div class="col priority-and-due priority">
+          {%for k,v in data.items()%}
+          {%if k=='high'%}
+          <h3>High Priority</h3>
+          {%for task in v%}
+          <ul>
+            <li class="week {{task['priority']}}">{{task['title']}} <span class='deadline'>{{task['date']}}</span>
+            </li>
+          </ul>
+          {%endfor%}
+          {%endif%}
+          {%endfor%}
         </div>
-        <!--end of column container-->
+        <!--col-->
+
+        <div class="col priority-and-due">
+          {%for k,v in data.items()%}
+          {%if k=='due'%}
+          <h3>Due Today</h3>
+          {%for task in v%}
+          <ul>
+            <li class="week {{task['priority']}}">{{task['title']}} {{task['priority']}} <span class='deadline'>{{task['date']}}</span>
+            </li>
+          </ul>
+          {%endfor%}
+          {%endif%}
+          {%endfor%}
+        </div>
+        <!--col-->
       </div>
-      <!--end of container-->
+      <!--end of row-->
     </div>
-    <!--end of wrapper-->
+    <!--end of column container-->
 
   </footer>
 
