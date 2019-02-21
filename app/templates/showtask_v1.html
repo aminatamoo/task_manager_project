@@ -10,7 +10,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD:app/templates/showtask_v1.html
 
     <h1>Task Manager</h1>
 
@@ -35,53 +34,6 @@
       <input type="submit" name="close_button" value="Close Task">
     </form>
 
-
-
-
-
-
-=======
-    <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="index.html"><i class="fa fa-home"></i></a>
-        </li>
-      </ul>
-    </div><!--nav-->
-
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Task Manager</h1>
-        <p class="lead"></p>
-      </div><!--container-->
-    </div><!--jumbotron-->
-
-    <div class="container">
-
-
-  <h2>Title: {{title}}</h2>
-  <p>Due Date: {{date}}</p>
-  <p>Due Time: {{time}}</p>
-  <p>Description:</p>
-  <p>{{description}}</p>
-  <p>{{priority}}</p>
-  <p>{{status}}</p>
-
-  <form action="showtask/{{id_t}}" method="post">
-    <input type="submit" name="edit_button" value="Edit Task">
-  </form>
-
-  <form action="showtask/{{id_t}}" method="post">
-    <input type="submit" name="delete_button" value="Delete Task">
-  </form>
-
-  <form action="showtask/{{id_t}}" method="post">
-    <input type="submit" name="close_button" value="Close Task">
-  </form>
-
-</div>
-<!--end of container-->
->>>>>>> dd9fc3c8d4802da92d46fd013fa2767b6dacc051:app/templates/showtask.html
 
 </body>
 </html>
