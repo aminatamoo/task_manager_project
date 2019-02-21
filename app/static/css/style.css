@@ -1,25 +1,286 @@
-.column {
-  text-align: center;
+html,
+body {
+ height: 100%;
+}
+
+/* Containers and wrappers */
+
+.main-container {
+ display: block;
+ position: relative;
+ padding-bottom: 50px; /* height of your footer */
+}
+
+.wrapper{
+  width: 800px;
+  margin: 100px;
+  justify-content: center;
+  display: flex;
+}
+
+.container-buttons {
+display: flex;
+justify-content: center;
+}
+
+.column-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Nav bar*/
+
+#navbar {
+  padding: -0.5rem 0rem;
+}
+
+a.nav-link.active {
+  display: block; /* Make the links appear below each other instead of side-by-side */
+  text-align: center; /* Center-align text */
+  padding: 16px; /* Add some padding */
+  transition: all 0.3s ease; /* Add transition for hover effects */
+  color: white; /* White text color */
+  font-size: 22px; /* Increased font-size */
+}
+
+/* Columns */
+
+.priority-and-due {
+  width: 300px;
+}
+
+.priority {
+  border-right: 2px solid #2D3142;
+}
+
+.col-sm {
+  border-right: 2px solid #2D3142;
+}
+
+.col-sm {
+  text-align: justify;
   margin: 7px;
 }
 
-li {
-  line-height: 35px;
-  padding-left: 10px;
+/*Formatting text*/
+
+h3 {
+  text-align: center;
 }
+
+/*Formatting text:  high priority and due today text*/
 
 .deadline {
   margin-left: 2%;
 }
 
+/* List components */
+
+ul {
+  padding: 0;
+}
+
+li.week {
+  line-height: 35px;
+}
+
+/* List components - bullets */
+
+li.week::before {
+  content: "\2022";
+  /* Unicode of character to precede the list item */
+
+  font-size: 1.5em;
+
+  padding-right: 0.5em;
+
+  padding-left: 0em;
+
+  top: 0em;
+}
+
 .high {
+  color: black;
+  list-style: none;
+}
+
+.high::before {
   color: red;
+  list-style: none;
 }
 
 .medium {
+  color: black;
+  list-style: none;
+}
+
+.medium::before {
   color: orange;
+  list-style: none;
 }
 
 .low {
-   color: yellow;
+  list-style: none;
+  color: black;
+}
+
+.low::before {
+  color: yellow;
+  list-style: none;
+}
+
+/* Check boxes*/
+/* ------------------------------------------------------------- */
+
+.css3--radio,
+.css3--checkbox {
+	@include no-bullets();
+	display: inline-block;
+	li {
+		display: inline-block;
+		margin-right: 1em;
+	}
+}
+
+:root .css3--radio,
+:root .css3--checkbox {
+	label {
+	    display: inline-block;
+	    vertical-align: middle;
+	}
+
+	label * { cursor: pointer; }
+
+	label:hover span,
+	label:hover span { color: $col-brand; }
+
+	input { border: none; }
+}
+
+:root {
+	.css3--radio input[type="radio"] + span,
+	.css3--radio input[type="radio"] + span::before,
+	.css3--checkbox input[type="checkbox"] + span,
+	.css3--checkbox input[type="checkbox"] + span::before {
+	    display: inline-block;
+	    vertical-align: middle;
+	}
+
+	.css3--radio input[type="radio"],
+	.css3--checkbox input[type="checkbox"] {
+	    opacity: 0;
+	    position: absolute;
+	}
+
+	.css3--radio input[type="radio"] + span,
+	.css3--checkbox input[type="checkbox"] + span {
+		@include font-size(16);
+		font-weight: 400;
+		text-transform: none;
+		letter-spacing: 0;
+	}
+
+	.css3--radio input[type="radio"] + span::before,
+	.css3--checkbox input[type="checkbox"] + span::before {
+	    content: "";
+	    margin: 0 8px 0 0;
+	    border: 2px solid $col-border;
+	    line-height: 0.5;
+	    text-align: center;
+	}
+
+	.css3--radio input[type="radio"]:checked + span::before,
+	.css3--checkbox input[type="checkbox"]:checked + span::before { color: $col-text; }
+
+	.css3--radio input[type="radio"]:disabled + span,
+	.css3--checkbox input[type="checkbox"]:disabled + span {
+	    cursor: default;
+	    opacity: .4;
+	}
+
+}
+
+:root .css3--radio {
+	input[type="radio"] + span::before {
+	   	width: 14px;
+	    height: 14px;
+		@include border-radius(100%);
+	}
+
+	input[type="radio"]:checked + span::before {
+	    content: "\2022";
+	    font-size: 32px;
+	}
+}
+
+:root .css3--checkbox {
+	input[type="checkbox"] + span::before {
+	   	width: 28px;
+	    height: 28px;
+	}
+
+	input[type="checkbox"]:checked + span::before 	{
+		content: '';
+		background-image: url('../images/check.svg');
+		background-color: white;
+		border-color: black;
+	}
+}
+
+/* Buttons */
+
+button {
+  justify-content: center;
+  width: 100px;
+  margin: 10px;
+}
+
+/*save button */
+
+button.like{
+  margin-bottom: 10px;
+}
+
+/*new task button*/
+.button-round {
+  /* To make a button perfectly round, it needs to be perfectly square first */
+  width: 60px;
+  height: 60px;
+  /*
+  A quick way to center what goes inside a button is using flex.
+  Making the flex-direction column will make it easier to center it vertically.
+  justify-content will center it vertically
+  align-items will center it horizontally
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* The padding bottom is to adjust the vertical centering */
+  padding-bottom: 10px;
+
+  border-radius: 50%;
+  border: 2px solid #f5f5f5;
+  background: #464646;
+  box-shadow: 0 0 3px gray;
+  font-size: 40px;
+  color: #fff;
+}
+
+
+.button-round:hover {
+    background: #262626;
+}
+
+
+/* footer */
+
+footer {
+  background-color: #e9ecef;
+  padding-bottom: 10px;
+  padding-top: 1px;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  position: relative;
 }

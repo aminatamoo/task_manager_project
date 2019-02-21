@@ -5,94 +5,118 @@
   <meta charset="UTF-8">
   <title>Homepage</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="index.html">Icon</a>
-      </li>
-    </ul>
-  </div>
+  <div class="main-container">
+    <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html"><i class="fa fa-home"></i></a>
+        </li>
+      </ul>
+    </div>
 
-  <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Task Manager</h1>
+        <p class="lead"></p>
+      </div>
+    </div>
+
     <div class="container">
-      <h1 class="display-4">Task Manager</h1>
-      <p class="lead"></p>
-    </div>
-  </div>
+      <form action="/index" method="post">
+        <div class="column-container">
+          <div class="row">
+            {% for k,v in data.items() %}
+            {% if k != 'high' and k != 'due' %}
+            <div class="col-sm">
+              <h3>{{k}}</h3>
+              <ul class="css3--checkbox">
+                {% for task in v %}
+                <label>
+                  <li class="week {{task['priority']}}"><span>{{task['title']}}
+                      {%if task['status']=='complete'%}</span>
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
+                    {% else %}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
+                    {% endif %}
+                </label>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {%endfor%}
+          </div><!-- .row -->
+        </div>
+        <!--end of column container-->
 
-  <div class="container">
-    <form action="/index" method="post">
-      <div class="row">
-          {% for k,v in data.items() %}
-          {% if k != 'high' and k != 'due' %}
-          <div class="col">
-            <h3>{{k}}</h3>
-            <ul>
-              {% for task in v %}
-              <li class="{{task['priority']}}">{{task['title']}} {{task['priority']}}
-                {%if task['status']=='complete'%}
-                <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
-                {% else %}
-                <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
-                {% endif %}
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-          {% endif %}
-          {%endfor%}
-      </div><!-- .row -->
+        <div class="wrapper-buttons">
+          <div class="container-buttons">
+          <button type="submit" class="like btn btn-primary" name="foo" value="bar">Save</button>
+          <a href="addtask"><button class ="btn btn-primary">Add Task</button></a>
+          </div><!--end of container-buttons-->
+          </div><!--end of wrapper-buttons-->
 
-    <div class="row">
-      <div class="col">
-          {%for k,v in data.items()%}
-          {%if k=='high'%}
-          <h3>High Priority</h3>
-          {%for task in v%}
-          <ul>
-            <li>{{task['title']}} {{task['priority']}} <span class='deadline'>{{task['date']}}</span>
-              {%if task['status']=='complete'%}
-              <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
-              {%else%}
-              <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
-              {%endif%}
-            </li>
-          </ul>
-          {%endfor%}
-          {%endif%}
-          {%endfor%}
-      </div>
+          </form>
 
-      <div class="col">
-          {%for k,v in data.items()%}
-          {%if k=='high'%}
-          <h3>Due Today</h3>
-          {%for task in v%}
-          <ul>
-            <li>{{task['title']}} {{task['priority']}} <span class='deadline'>{{task['date']}}</span>
-              {%if task['status']=='complete'%}
-              <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
-              {%else%}
-              <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
-              {%endif%}
-            </li>
-          </ul>
-          {%endfor%}
-          {%endif%}
-          {%endfor%}
-      </div>
-    </div>
-    <input type="submit">
 
-    <!--end of row-->
-  </form>
 
   </div>
   <!--end of container-->
+
+  </div>
+  <!--main-container-->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="wrapper">
+        <div class="column-container">
+          <div class="row">
+            <div class="col priority-and-due priority">
+              {%for k,v in data.items()%}
+              {%if k=='high'%}
+              <h3>High Priority</h3>
+              {%for task in v%}
+              <ul>
+                <li class="week {{task['priority']}}">{{task['title']}} <span class='deadline'>{{task['date']}}</span>
+                </li>
+              </ul>
+              {%endfor%}
+              {%endif%}
+              {%endfor%}
+            </div>
+
+            <div class="col priority-and-due">
+              {%for k,v in data.items()%}
+              {%if k=='high'%}
+              <h3>Due Today</h3>
+              {%for task in v%}
+              <ul>
+                <li class="week {{task['priority']}}">{{task['title']}} {{task['priority']}} <span class='deadline'>{{task['date']}}</span>
+                </li>
+              </ul>
+              {%endfor%}
+              {%endif%}
+              {%endfor%}
+            </div>
+
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of column container-->
+      </div>
+      <!--end of container-->
+    </div>
+    <!--end of wrapper-->
+
+  </footer>
+
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -103,3 +127,6 @@
 
 
 </html>
+
+<!-- Old add button: -->
+<!--<button type="button" class="w3-circle button-round">&#43;</button>-->

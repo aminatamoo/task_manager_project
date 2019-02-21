@@ -26,6 +26,12 @@ def index():
             'due': [{'id': 2, 'title': 'Dinner', 'date': '2019-02-20', 'day': 'Wednesday', 'time': '11:30:00', 'description': 'Make dinner', 'priority': 'medium', 'status': 'incomplete'}]}
     return render_template("index.html", data=data)
   
+@app.route("/viewtask")
+def view_task():
+    task={'Monday': [{'id': 1, 'title': 'Homework', 'date': '2019-02-18', 'day': 'Monday', 'time': '11:30:00', 'description': 'Do python chapter 1', 'priority': 'high', 'status': 'complete'}], 'Tuesday': [], 'Wednesday': [{'id': 2, 'title': 'Dinner', 'date': '2019-02-20', 'day': 'Wednesday', 'time': '11:30:00', 'description': 'Make dinner', 'priority': 'medium', 'status': 'incomplete'}], 'Thursday': [{'id': 3, 'title': 'Clean', 'date': '2019-02-21', 'day': 'Thursday', 'time': '10:15:00', 'description': 'Clean kitchen and living room', 'priority': 'low', 'status': 'incomplete'}], 'Friday': [], 'Saturday': [], 'Sunday': [], 'high': [{'id': 1, 'title': 'Homework', 'date': '2019-02-18', 'day': 'Monday', 'time': '11:30:00', 'description': 'Do python chapter 1', 'priority': 'high', 'status': 'complete'}], 'due': [{'id': 2, 'title': 'Dinner', 'date': '2019-02-20', 'day': 'Wednesday', 'time': '11:30:00', 'description': 'Make dinner', 'priority': 'medium', 'status': 'incomplete'}]}
+    return render_template("view_task.html", task=task)
+
+
 @app.route("/api")
 def index_api():
     data={'Monday': [{'id': 1, 'title': 'Homework', 'date': '2019-02-18', 'day': 'Monday', 'time': '11:30:00', 'description': 'Do python chapter 1', 'priority': 'high', 'status': 'complete'}], 'Tuesday': [], 'Wednesday': [{'id': 2, 'title': 'Dinner', 'date': '2019-02-20', 'day': 'Wednesday', 'time': '11:30:00', 'description': 'Make dinner', 'priority': 'medium', 'status': 'incomplete'}], 'Thursday': [{'id': 3, 'title': 'Clean', 'date': '2019-02-21', 'day': 'Thursday', 'time': '10:15:00', 'description': 'Clean kitchen and living room', 'priority': 'low', 'status': 'incomplete'}], 'Friday': [], 'Saturday': [], 'Sunday': [], 'high': [{'id': 1, 'title': 'Homework', 'date': '2019-02-18', 'day': 'Monday', 'time': '11:30:00', 'description': 'Do python chapter 1', 'priority': 'high', 'status': 'complete'}], 'due': [{'id': 2, 'title': 'Dinner', 'date': '2019-02-20', 'day': 'Wednesday', 'time': '11:30:00', 'description': 'Make dinner', 'priority': 'medium', 'status': 'incomplete'}]}
