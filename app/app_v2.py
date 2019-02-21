@@ -80,7 +80,7 @@ def addtask():
         flash('You\'ve successfully added a task', 'success')       
         return redirect(url_for('index'))
     if request.method=='GET':
-        return render_template('addtask.html',**locals())
+        return render_template('addtask_v1.html',**locals())
  
 #----------------API URLS--------------------#
  

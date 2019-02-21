@@ -22,8 +22,6 @@ def create_table():
     c,conn=getdb()
     c.execute('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, title TEXT, date DATE, day TEXT,time TIME, description TEXT, priority TEXT, status TEXT)')
 
-create_table()
-
 def convert_date_to_day(date):
     year, month, day = (int(x) for x in date.split('-'))
     answer = datetime.date(year, month, day).weekday()
