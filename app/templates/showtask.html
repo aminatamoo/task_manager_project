@@ -3,26 +3,41 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Homepage</title>
+  <title>Show Task</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
+  <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="http://127.0.0.1:5000/index"><i class="fa fa-home"></i></a>
+      </li>
+    </ul>
+  </div>
+  <!--nav-->
 
-    <h1>Task Manager</h1>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Task Manager</h1>
+      <p class="lead"></p>
+    </div>
+    <!--container-->
+  </div>
+  <!--jumbotron-->
 
+  <div class="container">
 
-    <p>Title: {{title}}</p>
-    <p>Due Date: {{date}}</p>
-    <p>Due Time: {{time}}</p>
-    <p>Description:</p>
-    <p>{{description}}</p>
-    <p>{{priority}}</p>
-    <p>{{status}}</p>
+    <div class="row {{priority}}-title-border">
+      <div class="col">
+        <p class="task-property">Title: {{title}}</p>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
 
-<<<<<<< HEAD
     <div class="row">
       <div class="col-12 col-sm-12 col-md-6 col lg-6">
         <p class="task-property">Date: {{date}}</p>
@@ -37,14 +52,48 @@
 
     </div>
     <!--row-->
-=======
-    <form action="" method="POST">
-      <input type="submit" name="edit" value="Edit Task">
-      <input type="submit" name="delete" value="Delete Task">
-      <input type="submit" name="close" value="Close Task">
-    </form>
->>>>>>> 6008e00de213ecbf62da234d4f162fd53431928a
 
+    <div class="row">
+      <div class="col">
+        <p class="task-property">Priority: {{priority}}</p>
+    </div>
+    <!--col-->
+    </div>
+    <!--row-->
+
+    <div class="row">
+      <div class="col">
+        <p class="task-property">Description:</p>
+        <p class="task-property">{{description}}</p>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+
+    <div class="wrapper-buttons">
+      <div class="container-buttons">
+
+      <form action="" method="POST">
+        <input type="submit" name="edit" value="Edit Task" class="btn btn-primary">
+        <input type="submit" name="delete" value="Delete Task" class="btn btn-primary">
+        <input type="submit" name="close" value="Close Task" class="btn btn-primary">
+      </form>
+
+    </div><!--end of container-buttons-->
+    </div><!--end of wrapper-buttons-->
+
+    </div>
+    <!--end of container-->
+
+    <footer>
+      <a class="nav-link active bottom" href="http://127.0.0.1:5000/index"><i class="fa fa-home"></i></a>
+
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

@@ -8,12 +8,11 @@ Created on Mon Feb 18 15:53:46 2019
 from flask import Flask, render_template, request, jsonify, flash, redirect, url_for
 from flask_cors import CORS
 from api import *
-from config import key
 import requests
 
 app = Flask("MyApp")
 cors = CORS(app)
-app.config['SECRET_KEY'] = key
+app.config['SECRET_KEY'] = 'reds209ndsldssdsljdslddbfudfbidabdfnfsfis'
 #app.secret_key()
 
    
