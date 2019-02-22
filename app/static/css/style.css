@@ -1,3 +1,18 @@
+/*
+INDEX:
+- Containers and wrappers
+- Navbar
+- Jumbotron
+- Columns
+- Formatting text
+- List components
+- List components - bullets
+- Check boxes
+- buttons
+- footer
+- Show task specific
+- Add task specific
+*/
 html,
 body {
  height: 100%;
@@ -8,7 +23,14 @@ body {
 .main-container {
  display: block;
  position: relative;
- padding-bottom: 50px; /* height of your footer */
+}
+
+#index{
+  background-color: #e9ecef;
+}
+
+#index form {
+  background-color: white;
 }
 
 .wrapper{
@@ -53,6 +75,19 @@ a.nav-link.active.bottom {
   font-size: 50px; /* Increased font-size */
 }
 
+/*Jumbotron*/
+
+.jumbotron {
+  background-image: url(../images/to-do-2.jpg);
+  background-repeat:no-repeat;
+  background-size:cover;
+  /*opacity: 0.7*/
+}
+/*@media (min-width: 576px)*/
+#index .jumbotron {
+  margin-bottom: 0;
+}
+
 /* Columns */
 
 .priority-and-due {
@@ -77,6 +112,10 @@ a.nav-link.active.bottom {
   width: 90%;
 }
 /*Formatting text*/
+
+#index .row {
+  padding-bottom: 60px;
+}
 
 h3 {
   text-align: center;
@@ -227,6 +266,15 @@ button {
   margin: 10px;
 }
 
+.btn-primary {
+  background-color: #264D90;
+  border-color: #264D90;
+}
+
+#index btn {
+  margin-top: 60px;
+}
+
 /*save button */
 
 button.like{
@@ -300,6 +348,54 @@ footer {
 
 /* ------------------------Addtask.html --------------------------*/
 
+#index form a {
+  color: black;
+}
+
 .add-task-form {
   margin-bottom: 20px;
+}
+
+/* Form */
+
+#index form {
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+}
+
+.alert {
+  margin-bottom: 0rem;
+}
+
+.task-form-lg{
+  display:block;
+}
+.task-form-sm{
+  display:none;
+}
+.priority-and-due {
+  width: 300px;
+  display:block;
+}
+.priority-and-due-sm{
+  display:none;
+}
+@media screen and (max-width:1194px){
+  .task-form-lg{
+    display:none;
+  }
+  .task-form-sm{
+    display:block;
+    text-align: center
+  }
+  .priority-and-due{
+    display:none;
+  }
+  .priority-and-due-sm{
+    display:block;
+    text-align: center
+  }
+  .priority-and-due-sm .week{
+    text-align: center;
+  }
 }

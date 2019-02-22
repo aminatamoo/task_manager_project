@@ -10,8 +10,9 @@
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
-<body>
+<body id="index">
   <div class="main-container">
+
     <div class="navbar navbar-dark bg-dark shadow-sm" id="navbar">
       <ul class="nav">
         <li class="nav-item">
@@ -19,15 +20,17 @@
         </li>
       </ul>
     </div>
+    <!--nav-->
 
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">Task Manager</h1>
         <p class="lead"></p>
       </div>
+      <!--jumbotron-->
     </div>
+    <!--container-->
 
-    <!--<div class="container">-->
     {%with messages = get_flashed_messages(with_categories=true)%}
     {%if messages%}
     {%for category, message in messages%}
@@ -35,37 +38,41 @@
     {%endfor%}
     {%endif%}
     {%endwith%}
-    <form action="/index" method="POST">
-      <div class="column-container">
-        <div class="row">
-          {% for k,v in data.items() %}
-          {% if k != 'high' and k != 'due' %}
-          <div class="col-sm">
-            <h3>{{k}}</h3>
-            <ul class="kkkcss3--checkbox">
-              {% for task in v %}
 
-              <li class="week {{task['priority']}}">
-                <label>
-                  {%if task['status']=='complete'%}
-                  <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
-                  {% else %}
-                  <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
-                  {% endif %}
-                  <span><a href="showtask/{{task['id']}}">{{task['title']}}</a></span>
-                </label>
+    <div class="task-form-lg">
 
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-          {% endif %}
-          {%endfor%}
-        </div><!-- .row -->
-      </div>
-      <!--end of column container-->
+      <form action="/index" method="POST">
+        <div class="column-container">
+          <div class="row">
+            {% for k,v in data.items() %}
+            {% if k != 'high' and k != 'due' %}
+            <div class="col-sm">
+              <h3>{{k}}</h3>
+              <ul class="kkkcss3--checkbox">
+                {% for task in v %}
 
-      <div class="container">
+                <li class="week {{task['priority']}}">
+                  <label>
+                    {%if task['status']=='complete'%}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
+                    {% else %}
+                    <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
+                    {% endif %}
+                    <span><a href="showtask/{{task['id']}}">{{task['title']}}</a></span>
+                  </label>
+
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <!--col-sm-->
+            {% endif %}
+            {%endfor%}
+          </div><!-- .row -->
+        </div>
+        <!--end of column container-->
+
+        <!--container-->
         <div class="wrapper-buttons">
           <div class="container-buttons">
             <input type="submit" class="like btn btn-primary" name="save" value="Save">
@@ -74,42 +81,76 @@
           <!--end of container-buttons-->
         </div>
         <!--end of wrapper-buttons-->
-    </form>
+      </form>
+    </div>
 
+    <div class="task-form-sm">
+      <form action="/index" method="POST">
+        {% for k,v in data.items() %}
+        {% if k != 'high' and k != 'due' %}
+        <div class="outer_form_div">
+          <h3>{{k}}</h3>
+          <ul class="kkkcss3--checkbox mt-2">
+            {% for task in v %}
+            <li class="week {{task['priority']}}">
+              <label>
+                {%if task['status']=='complete'%}
+                <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" checked />
+                {% else %}
+                <input type="checkbox" id="{{task['id']}}" name="check" value="{{task['id']}}" />
+                {% endif %}
+                <span><a href="showtask/{{task['id']}}">{{task['title']}}</a></span>
+              </label>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <hr>
+        {% endif %}
+        {%endfor%}
+        <div class="container save_add_buttons">
+          <div class="wrapper-buttons">
+            <div class="container-buttons">
+              <input type="submit" class="like btn btn-success btn-lg mr-4" name="save" value="Save">
+              <input id="add_btn" type="submit" class="like btn btn-success btn-lg" name="add" value="Add Task">
+            </div>
+            <!--end of container-buttons-->
+          </div>
+          <!--end of wrapper-buttons-->
+      </form>
+    </div>
+    <!--end of column container-->
   </div>
   <!--main-container-->
-
   <footer>
-
     <div class="container">
       <div class="row">
         <div class="col priority-and-due priority">
-          {%for k,v in data.items()%}
-          {%if k=='high'%}
           <h3>High Priority</h3>
-          {%for task in v%}
           <ul>
+            {%for k,v in data.items()%}
+            {%if k=='high'%}
+            {%for task in v%}
             <li class="week {{task['priority']}}">{{task['title']}} <span class='deadline'>{{task['date']}}</span>
             </li>
+            {%endfor%}
+            {%endif%}
+            {%endfor%}
           </ul>
-          {%endfor%}
-          {%endif%}
-          {%endfor%}
         </div>
         <!--col-->
-
         <div class="col priority-and-due">
-          {%for k,v in data.items()%}
-          {%if k=='due'%}
           <h3>Due Today</h3>
-          {%for task in v%}
           <ul>
+            {%for k,v in data.items()%}
+            {%if k=='due'%}
+            {%for task in v%}
             <li class="week {{task['priority']}}">{{task['title']}}<span class='deadline'>{{task['date']}}</span>
             </li>
+            {%endfor%}
+            {%endif%}
+            {%endfor%}
           </ul>
-          {%endfor%}
-          {%endif%}
-          {%endfor%}
         </div>
         <!--col-->
       </div>
@@ -117,9 +158,46 @@
     </div>
     <!--end of column container-->
 
+    <div>
+      <div class="priority-and-due-sm priority-sm">
+        <h3>High Priority</h3>
+        <ul class="pl-0">
+          {%for k,v in data.items()%}
+          {%if k=='high'%}
+          {%for task in v%}
+          <li class="week {{task['priority']}}">{{task['title']}} <span class='deadline'>{{task['date']}}</span>
+          </li>
+          {%endfor%}
+          {%endif%}
+          {%endfor%}
+        </ul>
+      </div>
+      <!--col-->
+
+
+
+      <div class="priority-and-due-sm">
+        <hr>
+        <h3>Due Today</h3>
+        <ul class="pl-0">
+          {%for k,v in data.items()%}
+          {%if k=='due'%}
+          {%for task in v%}
+          <li class="week {{task['priority']}}">{{task['title']}}<span class='deadline'>{{task['date']}}</span>
+          </li>
+          {%endfor%}
+          {%endif%}
+          {%endfor%}
+        </ul>
+      </div>
+    </div>
+    <!--container-->
+
+
   </footer>
 
 
+  <!--main-container-->
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -127,8 +205,4 @@
 
 </body>
 
-
 </html>
-
-<!-- Old add button: -->
-<!--<button type="button" class="w3-circle button-round">&#43;</button>-->
